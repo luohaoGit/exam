@@ -1,0 +1,10 @@
+<ion-view view-title="首页">
+  <ion-content class="padding">
+    <ion-slide-box show-pager="true">
+      <ion-slide ng-repeat="item in slides">
+        <h1>{{item.title}}</h1>
+        <img ng-src="{{item.data}}" />
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>
