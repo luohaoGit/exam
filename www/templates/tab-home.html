@@ -1,10 +1,88 @@
+<style>
+  table{width:80%; border:solid #d1d3d6; border-width:1px 0px 0px 1px; margin: 20px auto}
+  td{border:solid #d1d3d6; border-width:0px 1px 1px 0px; padding-left:10px; text-align: center}
+</style>
+
 <ion-view view-title="首页">
   <ion-content class="padding">
-    <ion-slide-box show-pager="true">
-      <ion-slide ng-repeat="item in slides">
-        <h1>{{item.title}}</h1>
-        <img ng-src="{{item.data}}" />
-      </ion-slide>
-    </ion-slide-box>
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            学期
+          </div>
+          <select>
+            <option selected>上学期</option>
+            <option>下学期</option>
+          </select>
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            学科
+          </div>
+          <select>
+            <option>Blue</option>
+            <option selected>Green</option>
+            <option>Red</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            年级
+          </div>
+          <select>
+            <option>Blue</option>
+            <option selected>Green</option>
+            <option>Red</option>
+          </select>
+        </label>
+      </div>
+      <div class="col">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            试卷
+          </div>
+          <select>
+            <option>Blue</option>
+            <option selected>Green</option>
+            <option>Red</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <button class="button button-block">
+      查询
+    </button>
+
+    <table>
+      <tr>
+        <td></td>
+        <td>知识点</td>
+        <td>分值占比</td>
+        <td>班级均分</td>
+        <td>班级得分率</td>
+        <td>学校平均分</td>
+        <td>学校得分率</td>
+      </tr>
+      <tr><td rowspan="5">三年二班</td><td>知识点1</td><td>14%</td><td>12</td><td>85.71%</td><td>11</td><td>78.57%</td></tr>
+      <tr><td>知识点2</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点3</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点4</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点5</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td rowspan="5">三年三班</td><td>知识点1</td><td>14%</td><td>12</td><td>85.71%</td><td>11</td><td>78.57%</td></tr>
+      <tr><td>知识点2</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点3</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点4</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+      <tr><td>知识点5</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+    </table>
+
+    <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
   </ion-content>
 </ion-view>

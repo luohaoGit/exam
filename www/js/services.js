@@ -2,6 +2,13 @@ angular.module('starter.services', [])
 
 .factory('DataService', function() {
 
+  //根据年级、学期、学科得到试卷，选择试卷后展示试卷测评结果
+  var terms = ["上学期", "下学期"];
+  var grades = ["", ""];
+  var subjects = ["", ""];
+
+  var papers = [];
+
   var fakeData1 = [{
     name: "人数",
     colorByPoint: true,
