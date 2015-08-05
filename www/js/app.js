@@ -50,6 +50,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.class', {
+    url: '/class/:classId',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-class.html',
+        controller: 'ClassCtrl'
+      }
+    }
+  })
+
   .state('tab.statistics', {
       url: '/statistics',
       views: {

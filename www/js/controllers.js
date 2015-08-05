@@ -62,6 +62,10 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	};
 })
 
+.controller('ClassCtrl', function($scope, DataService, $stateParams) {
+	$scope.classId = $stateParams.classId;
+})
+
 .controller('StatisticsCtrl', function($scope, DataService) {
 	$scope.chartConfig = {
 		options: {
