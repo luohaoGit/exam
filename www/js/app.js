@@ -50,42 +50,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.class', {
-    url: '/class/:classId',
+  .state('tab.paper', {
+    url: '/home/paper/:paperId',
     views: {
       'tab-home': {
-        templateUrl: 'templates/tab-class.html',
-        controller: 'ClassCtrl'
+        templateUrl: 'templates/tab-paper.html',
+        controller: 'PaperCtrl'
       }
     }
   })
 
-  .state('tab.student', {
-    url: '/student/:classId',
+  .state('tab.error', {
+    url: '/home/paper/error/:paperId/:stuId',
     views: {
       'tab-home': {
-        templateUrl: 'templates/tab-student.html',
-        controller: 'StudentCtrl'
-      }
-    }
-  })
-
-  .state('tab.statistics', {
-      url: '/statistics',
-      views: {
-        'tab-statistics': {
-          templateUrl: 'templates/tab-statistics.html',
-          controller: 'StatisticsCtrl'
-        }
-      }
-    })
-
-  .state('tab.wrong', {
-    url: '/wrong',
-    views: {
-      'tab-wrong': {
-        templateUrl: 'templates/tab-wrong.html',
-        controller: 'WrongCtrl'
+        templateUrl: 'templates/tab-error.html',
+        controller: 'ErrorCtrl'
       }
     }
   })

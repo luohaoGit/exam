@@ -1,0 +1,54 @@
+
+<style>
+  table{width:80%; border:solid #d1d3d6; border-width:1px 0px 0px 1px; margin: 20px auto}
+  td{border:solid #d1d3d6; border-width:0px 1px 1px 0px; padding-left:10px; text-align: center}
+</style>
+
+<ion-view view-title="数据分析">
+  <ion-content>
+    <div class="list">
+      <div class="item item-button-right">
+        初一上学期语文期末复习测试卷
+        <a class="button button-positive" href="#/tab/home/paper/error/1/1">
+          错题详情分析
+        </a>
+      </div>
+    </div>
+
+    <table>
+      <tr><td colspan="4" style="color:#5576ba;">考试成绩</td></tr>
+      <tr>
+        <td>学科</td>
+        <td>试卷名称</td>
+        <td>得分</td>
+        <td>班级档次</td>
+      </tr>
+      <tr>
+        <td>英语</td>
+        <td>第一单元测评卷</td>
+        <td>96</td>
+        <td>A</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr><td colspan="5" style="color:#5576ba">质量基础统计表</td></tr>
+      <tr>
+        <td>平均分</td>
+        <td>最高分</td>
+        <td>最低分</td>
+        <td>优秀率</td>
+        <td>及格率</td>
+      </tr>
+      <tr>
+        <td>82</td>
+        <td>100</td>
+        <td>58</td>
+        <td>87%</td>
+        <td>80%</td>
+      </tr>
+    </table>
+
+    <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
+  </ion-content>
+</ion-view>

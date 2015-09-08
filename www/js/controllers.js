@@ -1,26 +1,97 @@
 angular.module('starter.controllers', ['highcharts-ng'])
 
 .controller('HomeCtrl', function($scope, DataService) {
+
+})
+
+.controller('PaperCtrl', function($scope, DataService, $stateParams) {
+	$scope.paperId = $stateParams.paperId;
+
 	$scope.chartConfig = {
 		options: {
 			chart: {
 				type: 'column'
 			},
 			xAxis: {
-				categories: [
-					'知识点1',
-					'知识点2',
-					'知识点3',
-					'知识点4',
-					'知识点5'
-				],
-				crosshair: true
+				type: 'category',
+				title: {
+					text: '得分分布统计'
+				}
 			},
 			yAxis: {
-				min: 0,
 				title: {
-					text: '得分率 (%)'
+					text: '人数（人）'
 				}
+			},
+			legend: {
+				enabled: false
+			},
+			plotOptions: {
+				series: {
+					borderWidth: 0,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						format: '{point.y}人'
+					}
+				}
+			},
+
+			tooltip: {
+				headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}人</b><br/>'
+			}
+		},
+		series: [{
+			data: [{
+				name: "A 90-100分",
+				y: 25
+			}, {
+				name: "B 80-89分",
+				y: 18
+			}, {
+				name: "C 70-79分",
+				y: 5
+			}, {
+				name: "D 60-69分",
+				y: 2
+			}, {
+				name: "E 59分以下",
+				y: 1
+			}],
+			colorByPoint: true,
+			name: "人数"
+		}],
+		title: {
+			text: '基础统计'
+		},
+
+		loading: false
+	};
+})
+
+.controller('ErrorCtrl', function($scope, DataService, $stateParams) {
+	$scope.errorId = $stateParams.errorId;
+	$scope.stuId = $stateParams.stuId;
+
+	$scope.chartConfig = {
+		options: {
+			chart: {
+				type: 'column'
+			},
+			xAxis: {
+				type: 'category',
+				title: {
+					text: '答题分布统计'
+				}
+			},
+			yAxis: {
+				title: {
+					text: '选项人数占比（%）'
+				}
+			},
+			legend: {
+				enabled: false
 			},
 			plotOptions: {
 				series: {
@@ -32,30 +103,15 @@ angular.module('starter.controllers', ['highcharts-ng'])
 					}
 				}
 			},
+
 			tooltip: {
-				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				'<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
-				footerFormat: '</table>',
-				shared: true,
-				useHTML: true
+				headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
 			}
 		},
-		series: [{
-			name: '三年二班得分率',
-			data: [49.9, 71.5, 106.4, 129.2, 144.0]
-
-		}, {
-			name: '三年三班得分率',
-			data: [83.6, 78.8, 98.5, 93.4, 106.0]
-
-		},{
-			name: '校平均得分率',
-			data: [48.9, 38.8, 39.3, 41.4, 47.0]
-
-		}],
+		series: DataService.getWrongSeries(),
 		title: {
-			text: '各班级知识点得分率比较统计图'
+			text: '本班该题的正确率'
 		},
 
 		loading: false
