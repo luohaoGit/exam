@@ -51,11 +51,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
   .state('tab.wrong', {
-    url: '/paper/wrong/:id',
+    url: '/wrong/:id',
     views: {
       'tab-paper': {
         templateUrl: 'templates/tab-wrong.html',
         controller: 'WrongCtrl'
+      }
+    }
+  })
+
+  .state('tab.exercise', {
+    url: '/exercise/:id',
+    views: {
+      'tab-paper': {
+        templateUrl: 'templates/tab-exercise.html',
+        controller: 'ExerciseCtrl'
+      }
+    }
+  })
+
+  .state('tab.answer', {
+    url: '/answer/:id',
+    views: {
+      'tab-paper': {
+        templateUrl: 'templates/tab-answer.html',
+        controller: 'AnswerCtrl'
       }
     }
   })

@@ -112,3 +112,10 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	};
 })
 
+.controller('ExerciseCtrl', function($scope, DataService, $stateParams) {
+
+})
+
+.controller('AnswerCtrl', function($scope, DataService, $stateParams) {
+
+})
