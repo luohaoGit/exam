@@ -4,28 +4,60 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	$scope.chartConfig = {
 		options: {
 			chart: {
-				plotBackgroundColor: null,
-				plotBorderWidth: null,
-				plotShadow: false,
-				type: 'pie'
+				type: 'column'
 			},
-			tooltip: {
-				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			xAxis: {
+				type: 'category',
+				title: {
+					text: '得分分布统计'
+				}
+			},
+			yAxis: {
+				title: {
+					text: '人数（人）'
+				}
+			},
+			legend: {
+				enabled: false
 			},
 			plotOptions: {
-				pie: {
-					allowPointSelect: true,
+				series: {
+					borderWidth: 0,
 					cursor: 'pointer',
 					dataLabels: {
-						enabled: false
-					},
-					showInLegend: true
+						enabled: true,
+						format: '{point.y}人'
+					}
 				}
+			},
+
+			tooltip: {
+				headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}人</b><br/>'
 			}
 		},
-		series: DataService.getStatisticsSeries(),
+		series: [{
+			data: [{
+				name: "A 90-100分",
+				y: 25
+			}, {
+				name: "B 80-89分",
+				y: 18
+			}, {
+				name: "C 70-79分",
+				y: 5
+			}, {
+				name: "D 60-69分",
+				y: 2
+			}, {
+				name: "E 59分以下",
+				y: 1
+			}],
+			colorByPoint: true,
+			name: "人数"
+		}],
 		title: {
-			text: '人数'
+			text: '基础统计'
 		},
 
 		loading: false
