@@ -40,36 +40,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/tab-home.html',
-        controller: 'HomeCtrl'
-      }
-    }
-  })
-
-  .state('tab.class', {
-    url: '/class/:classId',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/tab-class.html',
-        controller: 'ClassCtrl'
-      }
-    }
-  })
-
-  .state('tab.student', {
-    url: '/student/:classId',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/tab-student.html',
-        controller: 'StudentCtrl'
-      }
-    }
-  })
-
   .state('tab.statistics', {
       url: '/statistics',
       views: {
@@ -95,6 +65,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
   $ionicConfigProvider.platform.android.navBar.alignTitle('center');
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/tab/statistics');
 
 });
