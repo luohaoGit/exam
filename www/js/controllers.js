@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['highcharts-ng'])
 
-.controller('StatisticsCtrl', function($scope, DataService) {
+.controller('PaperCtrl', function($scope, DataService) {
 	$scope.chartConfig = {
 		options: {
 			chart: {
@@ -66,7 +66,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 
 .controller('WrongCtrl', function($scope, DataService, $stateParams) {
 
-	$scope.questionId = $stateParams.questionId;
+	$scope.questionId = $stateParams.id;
 
 	$scope.chartConfig = {
 		options: {
