@@ -1,13 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('DataService', function() {
-
-  //根据年级、学期、学科得到试卷，选择试卷后展示试卷测评结果
-  var terms = ["上学期", "下学期"];
-  var grades = ["", ""];
-  var subjects = ["", ""];
-
-  var papers = [];
+.factory('DataService', function($http) {
 
   var fakeData1 = [{
     name: "人数",
@@ -50,26 +43,19 @@ angular.module('starter.services', [])
     }]
   }];
 
-  // Some templet data
-  var data = {
-    statisticsSeries : fakeData1,
-    wrongSeries : fakeData2,
-    pics : [
-      "http://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/fashion-backless.jpg",
-      "http://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/fashion-front.jpg",
-      "http://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/fashion-pair.jpg"
-    ]
-  };
 
   return {
-    getStatisticsSeries: function() {
-      return data.statisticsSeries;
+    getPaperInfo: function(param) {
+      var url = "http://111.211.167.6:8094/api.php/Home/Analyze/getPerStuReport" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
     },
+
     getWrongSeries: function(){
-      return data.wrongSeries;
-    },
-    getPics: function(){
-      return data.pics;
+
     }
   };
 });

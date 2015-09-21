@@ -1,6 +1,23 @@
 angular.module('starter.controllers', ['highcharts-ng'])
 
-.controller('PaperCtrl', function($scope, DataService) {
+.controller('PaperCtrl', function($scope, $location, DataService){
+	$scope.data = {};
+
+	var absUrl = $location.absUrl();
+	var param = "";
+
+	if(absUrl){
+		var i = absUrl.indexOf("?");
+		var j = absUrl.indexOf("#");
+		param = absUrl.substring(i, j);
+	}
+
+	DataService.getPaperInfo(param).then(function(resp){
+		$scope.data = resp.data.data[0];
+	},function(resp){
+		alert("网络错误")
+	});;
+
 	$scope.chartConfig = {
 		options: {
 			chart: {
