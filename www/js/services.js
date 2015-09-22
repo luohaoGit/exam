@@ -54,8 +54,14 @@ angular.module('starter.services', [])
       return promise;
     },
 
-    getWrongSeries: function(){
-
+    getWrongInfo: function(param){
+      param = "?informid=1&stuid=1";
+      var url = "http://111.211.167.6:8094/api.php/Home/Analyze/getPerMisQues" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
     }
   };
 });

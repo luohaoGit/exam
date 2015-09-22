@@ -51,7 +51,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
   .state('tab.wrong', {
-    url: '/wrong/:id',
+    url: '/wrong',
     views: {
       'tab-paper': {
         templateUrl: 'templates/tab-wrong.html',

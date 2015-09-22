@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['highcharts-ng'])
 
-.controller('PaperCtrl', function($scope, $location, DataService){
+.controller('PaperCtrl', function($scope, $rootScope, $location, DataService){
 	$scope.data = {};
 
 	var absUrl = $location.absUrl();
@@ -10,9 +10,10 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		var i = absUrl.indexOf("?");
 		var j = absUrl.indexOf("#");
 		param = absUrl.substring(i, j);
+		$rootScope.param = param;
 	}
 
-	DataService.getPaperInfo(param).then(function(resp){
+	DataService.getPaperInfo($rootScope.param).then(function(resp){
 		$scope.data = resp.data.data[0];
 
 		$scope.chartConfig = {
@@ -73,6 +74,9 @@ angular.module('starter.controllers', ['highcharts-ng'])
 			title: {
 				text: '基础统计'
 			},
+			credits: {
+				enabled:false
+			},
 
 			loading: false
 		};
@@ -81,9 +85,14 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	});
 })
 
-.controller('WrongCtrl', function($scope, DataService, $stateParams) {
+.controller('WrongCtrl', function($scope, $rootScope, DataService, $stateParams) {
+	$scope.data = [];
 
-	$scope.questionId = $stateParams.id;
+	DataService.getWrongInfo($rootScope.param).then(function(resp){
+		$scope.data = resp.data.data;
+	},function(resp){
+		alert("网络错误")
+	});
 
 	$scope.chartConfig = {
 		options: {
@@ -120,7 +129,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 				pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
 			}
 		},
-		series: DataService.getWrongSeries(),
+		series: [],
 		title: {
 			text: '本班该题的正确率'
 		},
