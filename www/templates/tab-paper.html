@@ -25,9 +25,12 @@
       </tr>
       <tr>
         <td>{{data.subjects}}</td>
-        <td>第一单元测评卷</td>
-        <td>96</td>
-        <td>A</td>
+        <td>{{data.testpapername}}</td>
+        <td>{{data.score}}</td>
+        <td>{{data.score >= 90 ? 'A' :
+          (data.score >= 80 && data.score < 90) ? 'B' :
+          (data.score >= 70 && data.score < 80) ? 'C' :
+          (data.score >= 60 && data.score < 70) ? 'D' : 'E'}}</td>
       </tr>
     </table>
 
@@ -41,11 +44,11 @@
         <td>及格率</td>
       </tr>
       <tr>
-        <td>82</td>
-        <td>100</td>
-        <td>58</td>
-        <td>87%</td>
-        <td>80%</td>
+        <td>{{data.avg_score}}</td>
+        <td>{{data.max_score}}</td>
+        <td>{{data.min_score}}</td>
+        <td>{{data.excellence_rate}}</td>
+        <td>{{data.pass_rate}}</td>
       </tr>
     </table>
 
