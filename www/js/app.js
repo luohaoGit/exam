@@ -84,6 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $ionicConfigProvider.platform.android.tabs.position('bottom');
   $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
   $ionicConfigProvider.platform.android.navBar.alignTitle('center');
+  $ionicConfigProvider.views.swipeBackEnabled(false);
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/paper');
 
