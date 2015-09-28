@@ -62,6 +62,16 @@ angular.module('starter.services', [])
         url: url
       });
       return promise;
+    },
+
+    getExerciseInfo: function(param){
+      param = "?questionid=d215591c-2e6b";
+      var url = "http://111.211.167.6:8094/api.php/home/testpaper/gettytestpaper" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
     }
   };
 });
