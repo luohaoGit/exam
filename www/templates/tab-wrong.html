@@ -3,7 +3,7 @@
     <div class="list">
 
       <div ng-repeat="item in data">
-        <img src="{{item.url}}">
+        <img ng-src="{{item.url}}">
         <div class="item">
           <i class="icon ion-close-circled"></i>回答错误
         </div>
@@ -23,7 +23,7 @@
           未掌握的能力点：{{item.pn_content}}
         </div>
         <div class="item">
-          <a class="button button-positive" href="#/tab/exercise/{{item.qid}}">
+          <a class="button button-positive" href="#/tab/exercise/{{$index}}/{{item.qid}}">
             提优训练
           </a>
         </div>

@@ -61,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('tab.exercise', {
-    url: '/exercise/:id',
+    url: '/exercise/:index/:id',
     views: {
       'tab-paper': {
         templateUrl: 'templates/tab-exercise.html',

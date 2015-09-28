@@ -138,12 +138,13 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	};
 })
 
-.controller('ExerciseCtrl', function($scope, DataService, $stateParams) {
+.controller('ExerciseCtrl', function($scope, DataService, $stateParams, $rootScope) {
 	$scope.data = [];
 
 	DataService.getExerciseInfo($stateParams.id).then(function(resp){
 		$scope.data = resp.data.data;
-		console.log($scope.data)
+		$rootScope.exerciseData[$stateParams.index] = $scope.data;
+		console.log($rootScope.exerciseData[$stateParams.index])
 	},function(resp){
 		alert("网络错误")
 	});
