@@ -11,32 +11,32 @@
         <ul class="list">
           <li class="item item-checkbox">
             <label class="checkbox">
-              <input type="radio" name="group">
+              <input type="radio" name="group{{$index}}" ng-value="'A'" ng-model="item.myAnswer">
             </label>
             A
           </li>
           <li class="item item-checkbox">
             <label class="checkbox">
-              <input type="radio" name="group">
+              <input type="radio" name="group{{$index}}" ng-value="'B'" ng-model="item.myAnswer">
             </label>
             B
           </li>
           <li class="item item-checkbox">
             <label class="checkbox">
-              <input type="radio" name="group">
+              <input type="radio" name="group{{$index}}" ng-value="'C'" ng-model="item.myAnswer">
             </label>
             C
           </li>
           <li class="item item-checkbox">
             <label class="checkbox">
-              <input type="radio" name="group">
+              <input type="radio" name="group{{$index}}" ng-value="'D'" ng-model="item.myAnswer">
             </label>
             D
           </li>
         </ul>
       </div>
 
-      <a class="button button-positive" href="#/tab/answer/1">
+      <a class="button button-positive" href="#/tab/answer/{{wrongIndex}}">
         答案解析
       </a>
     </div>
