@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('tab.answer', {
-    url: '/answer/:id',
+    url: '/answer/:wrongIndex',
     views: {
       'tab-paper': {
         templateUrl: 'templates/tab-answer.html',

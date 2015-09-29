@@ -152,11 +152,9 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		alert("网络错误")
 	});
 
-	$scope.$watch('data', function(newValue,oldValue, scope){
-		console.log($scope.data)
-	});
 })
 
 .controller('AnswerCtrl', function($scope, DataService, $stateParams, $rootScope) {
-	console.log($rootScope.exerciseData)
+	$scope.data = $rootScope.exerciseData[$stateParams.wrongIndex];
+	console.log($scope.data)
 })
