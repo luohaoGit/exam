@@ -19,27 +19,34 @@
                 <td>评价</td>
                 <td>总得分率</td>
             </tr>
-            <tr>
-                <td rowspan="6">第一小学</td><td>知识点1</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
+            <tbody ng-repeat="item in data.schApKp">
+            <tr ng-repeat="i in item.detail">
+                <td ng-if="$index == 0" rowspan="{{item.detail.length}}">{{item.schname}}</td>
+                <td>{{i.kpname}}</td>
+                <td>{{i.scoreDetail[0].kapScore}}</td>
+                <td>{{i.scoreDetail[1].kapScore}}</td>
+                <td>{{i.scoreDetail[2].kapScore}}</td>
+                <td>{{i.scoreDetail[3].kapScore}}</td>
+                <td>{{i.scoreDetail[4].kapScore}}</td>
+                <td>{{i.scoreDetail[5].kapScore}}</td>
+                <td>0</td>
             </tr>
-            <tr>
-                <td>知识点2</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
-            </tr>
-            <tr>
-                <td>知识点3</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
-            </tr>
-            <tr>
-                <td>知识点4</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
-            </tr>
-            <tr>
-                <td>知识点5</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
-            </tr>
-            <tr>
-                <td>知识点6</td><td>87</td><td>95</td><td>67</td><td>67</td><td>34</td><td>64</td><td>54</td>
-            </tr>
+            </tbody>
         </table>
 
-
+        <h1>区属各小学整体知识点得分率统计表</h1>
+        <table>
+            <tr>
+                <td>知识点</td>
+                <td ng-repeat="item in data.kpSchPropCount[0].detail">{{item.schname}}</td>
+                <td>区平均分</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="item in data.schApKp">
+                <td>知识点1</td><td>78.85%</td><td>89.35%</td><td>87.92%</td>
+            </tr>
+            </tbody>
+        </table>
 
 
         <table>

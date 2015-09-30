@@ -173,7 +173,15 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	 }*/
 
 	DataService.getSchApKp(param).then(function(resp){
-		console.log(resp)
+		$scope.data.schApKp = resp.data.data;
+		console.log($scope.data)
+	},function(resp){
+		alert("网络错误")
+	});
+
+	DataService.getKpSchPropCount(param).then(function(resp){
+		$scope.data.kpSchPropCount = resp.data.data;
+		console.log($scope.data)
 	},function(resp){
 		alert("网络错误")
 	});

@@ -43,10 +43,11 @@ angular.module('starter.services', [])
     }]
   }];
 
+  var remotesite = "http://111.211.167.6:8094";
 
   return {
     getPaperInfo: function(param) {
-      var url = "http://111.211.167.6:8094/api.php/Home/Analyze/getPerStuReport" + param;
+      var url = remotesite + "/api.php/Home/Analyze/getPerStuReport" + param;
       var promise = $http({
         method: 'GET',
         url: url
@@ -56,7 +57,7 @@ angular.module('starter.services', [])
 
     getWrongInfo: function(param){
       param = "?informid=1&stuid=1";
-      var url = "http://111.211.167.6:8094/api.php/Home/Analyze/getPerMisQues" + param;
+      var url = remotesite + "/api.php/Home/Analyze/getPerMisQues" + param;
       var promise = $http({
         method: 'GET',
         url: url
@@ -66,7 +67,7 @@ angular.module('starter.services', [])
 
     getExerciseInfo: function(param){
       param = "?questionid=d215591c-2e6b";
-      var url = "http://111.211.167.6:8094/api.php/home/testpaper/gettytestpaper" + param;
+      var url = remotesite + "/api.php/home/testpaper/gettytestpaper" + param;
       var promise = $http({
         method: 'GET',
         url: url
@@ -75,7 +76,16 @@ angular.module('starter.services', [])
     },
 
     getSchApKp: function(param) {
-      var url = "http://111.208.58.117:8092/api.php/Home/Analyze/getSchApKp?informid=58&gradeid=1&subjectid=1" + param;
+      var url = remotesite + "/api.php/Home/Analyze/getSchApKp?informid=58&gradeid=1&subjectid=1" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
+    },
+
+    getKpSchPropCount: function(param) {
+      var url = remotesite + "/api.php/Home/Analyze/getKpSchPropCount?informid=58&areaid=1" + param;
       var promise = $http({
         method: 'GET',
         url: url
