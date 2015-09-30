@@ -80,6 +80,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.teacher', {
+    url: '/teacher',
+    views: {
+      'tab-teacher': {
+        templateUrl: 'templates/tab-teacher.html',
+        controller: 'TeacherCtrl'
+      }
+    }
+  })
+
+  .state('tab.class', {
+    url: '/class/:classId',
+    views: {
+      'tab-teacher': {
+        templateUrl: 'templates/tab-class.html',
+        controller: 'ClassCtrl'
+      }
+    }
+  })
+
+  .state('tab.student', {
+    url: '/student/:classId',
+    views: {
+      'tab-teacher': {
+        templateUrl: 'templates/tab-student.html',
+        controller: 'StudentCtrl'
+      }
+    }
+  })
+
   $ionicConfigProvider.platform.ios.tabs.position('bottom');
   $ionicConfigProvider.platform.android.tabs.position('bottom');
   $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
