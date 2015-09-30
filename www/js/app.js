@@ -70,26 +70,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.statistics', {
-      url: '/statistics',
-      views: {
-        'tab-statistics': {
-          templateUrl: 'templates/tab-statistics.html',
-          controller: 'StatisticsCtrl'
-        }
-      }
-    })
-
-  .state('tab.wrong', {
-    url: '/wrong',
-    views: {
-      'tab-wrong': {
-        templateUrl: 'templates/tab-wrong.html',
-        controller: 'WrongCtrl'
-      }
-    }
-  })
-
   $ionicConfigProvider.platform.ios.tabs.position('bottom');
   $ionicConfigProvider.platform.android.tabs.position('bottom');
   $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
