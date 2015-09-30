@@ -1,6 +1,24 @@
 angular.module('starter.controllers', ['highcharts-ng'])
 
 .controller('HomeCtrl', function($scope, DataService) {
+	$scope.data = {};
+
+	var absUrl = $location.absUrl();
+	var param = "?informid=58&gradeid=1&subjectid=1";
+
+/*	if(absUrl){
+		var i = absUrl.indexOf("?");
+		var j = absUrl.indexOf("#");
+		param = absUrl.substring(i, j);
+		$rootScope.param = param;
+	}*/
+
+	DataService.getSchApKp(param).then(function(resp){
+		console.log(resp)
+	},function(resp){
+		alert("网络错误")
+	});
+
 	$scope.chartConfig = {
 		options: {
 			chart: {
