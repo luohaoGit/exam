@@ -142,7 +142,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	$scope.data = [];
 	$scope.wrongIndex = $stateParams.index;
 
-	DataService.getExerciseInfo($stateParams.id).then(function(resp){
+	DataService.getExerciseInfo("?questionid=" + $stateParams.id).then(function(resp){
 		$rootScope.exerciseData[$stateParams.index] = resp.data.data;
 		for(var i=0; i<resp.data.data.length; i++){
 			$rootScope.exerciseData[$stateParams.index][i]['myAnswer'+i] = '';
@@ -159,27 +159,28 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	console.log($scope.data)
 })
 
-.controller('TeacherCtrl', function($scope, DataService) {
+.controller('TeacherCtrl', function($scope, DataService, $location, $rootScope) {
 	$scope.data = {};
 
-	//var absUrl = $location.absUrl();
-	var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
+	var absUrl = $location.absUrl();
+	//var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
 
-	/*	if(absUrl){
-	 var i = absUrl.indexOf("?");
-	 var j = absUrl.indexOf("#");
-	 param = absUrl.substring(i, j);
-	 $rootScope.param = param;
-	 }*/
+	if(absUrl){
+		var i = absUrl.indexOf("?");
+		var j = absUrl.indexOf("#");
+		var param = absUrl.substring(i, j);
+		$rootScope.teacherParam = param;
+		console.log(param)
+	}
 
-	DataService.getSchApKp(param).then(function(resp){
+	DataService.getSchApKp($rootScope.teacherParam).then(function(resp){
 		$scope.data.schApKp = resp.data.data;
 		console.log($scope.data)
 	},function(resp){
 		alert("网络错误")
 	});
 
-	DataService.getKpSchPropCount(param).then(function(resp){
+	DataService.getKpSchPropCount($rootScope.teacherParam).then(function(resp){
 		$scope.data.kpSchPropCount = resp.data.data;
 		console.log($scope.data)
 
