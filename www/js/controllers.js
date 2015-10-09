@@ -320,6 +320,11 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		alert("网络错误")
 	});
 
+})
+
+.controller('SchoolCtrl', function($scope, DataService, $stateParams) {
+	$scope.schoolId = $stateParams.schoolId;
+	$scope.data = [];
 	DataService.getKpClassScoreAbility("?informid=71&schid=3030").then(function(resp){
 		$scope.data.kpClassScoreAbility = resp.data.data;
 		console.log($scope.data)
@@ -342,7 +347,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 			o.data = arr;
 			chartData.push(o);
 		}
-		$scope.chartConfig2 = {
+		$scope.chartConfig = {
 			options: {
 				chart: {
 					type: 'column'
@@ -388,11 +393,17 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	},function(resp){
 		alert("网络错误")
 	});
-
 })
 
 .controller('ClassCtrl', function($scope, DataService, $stateParams) {
 	$scope.classId = $stateParams.classId;
+	$scope.data = [];
+	DataService.getKpPerScoreAbility("?informid=71&schid=3030&classid=303061").then(function(resp){
+		$scope.data.kpPerScoreAbility = resp.data.data;
+		console.log($scope.data)
+	},function(resp){
+		alert("网络错误")
+	});
 })
 
 .controller('StudentCtrl', function($scope, DataService, $stateParams) {
@@ -401,7 +412,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	$scope.chartConfig1 = {
 		options: {
 			title: {
-				text: '个人能力点得分率统计图',
+				text: '个人知识点得分率统计图',
 				x: -20 //center
 			},
 			subtitle: {
@@ -483,20 +494,20 @@ angular.module('starter.controllers', ['highcharts-ng'])
 			}
 		},
 		series: [{
-			name: '三年二班得分率',
+			name: '个人得分率',
 			data: [49.9, 71.5, 106.4, 129.2, 144.0]
 
 		}, {
-			name: '三年三班得分率',
+			name: '班级得分率',
 			data: [83.6, 78.8, 98.5, 93.4, 106.0]
 
 		},{
-			name: '校平均得分率',
+			name: '学校得分率',
 			data: [48.9, 38.8, 39.3, 41.4, 47.0]
 
 		}],
 		title: {
-			text: '各班级知识点得分率比较统计图'
+			text: '个人知识点得分率比较统计图'
 		},
 
 		loading: false

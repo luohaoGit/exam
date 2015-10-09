@@ -3,29 +3,25 @@
     td{border:solid #d1d3d6; border-width:0px 1px 1px 0px; padding-left:10px; text-align: center}
 </style>
 
-<ion-view view-title="班级统计">
+<ion-view view-title="学校统计">
     <ion-content class="padding">
         <table>
             <tr>
                 <td></td>
                 <td>知识点</td>
                 <td>分值占比</td>
-                <td>个人得分</td>
-                <td>个人得分率</td>
-                <td>班级平均分</td>
+                <td>班级均分</td>
                 <td>班级得分率</td>
                 <td>学校平均分</td>
                 <td>学校得分率</td>
             </tr>
-            <tbody ng-repeat="item in data.kpPerScoreAbility">
+            <tbody ng-repeat="item in data.kpClassScoreAbility">
             <tr ng-repeat="i in item.detail">
                 <td ng-if="$index == 0" rowspan="{{item.detail.length}}" style="text-align: center;vertical-align:middle;">
-                    <a href="#/tab/student/1">{{item.stuname}}</a>
+                    <a href="#/tab/class/1">{{item.classname}}</a>
                 </td>
                 <td>{{i.kpname}}</td>
                 <td>{{i.kpSchProp}}</td>
-                <td>{{i.kpPerSumScore}}</td>
-                <td>{{i.kpPerScore}}</td>
                 <td>{{i.kpClassAvgScore}}</td>
                 <td>{{i.kpClassScore}}</td>
                 <td>{{i.kpSchAvgScore}}</td>
@@ -33,6 +29,8 @@
             </tr>
             </tbody>
         </table>
+
+        <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
 
     </ion-content>
 </ion-view>

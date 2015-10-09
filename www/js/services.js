@@ -109,6 +109,15 @@ angular.module('starter.services', [])
         url: url
       });
       return promise;
+    },
+
+    getKpPerScoreAbility: function(param){
+      var url = remotesite + "/api.php/Home/Analyze/getKpPerScoreAbility" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
     }
   };
 });
