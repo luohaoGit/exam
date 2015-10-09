@@ -42,12 +42,40 @@
                 <td>区平均分</td>
             </tr>
             <tbody>
-            <tr ng-repeat="item in data.schApKp">
-                <td>知识点1</td><td>78.85%</td><td>89.35%</td><td>87.92%</td>
+            <tr ng-repeat="item in data.kpSchPropCount">
+                <td>{{item.kpname}}</td>
+                <td ng-repeat="i in item.detail">{{i.kpAreaScore}}</td>
+                <td>{{item.detail[0].kpSchScore}}</td>
             </tr>
             </tbody>
         </table>
 
+        <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
+
+        <table>
+            <tr>
+                <td></td>
+                <td>知识点</td>
+                <td>分值占比</td>
+                <td>学校均分</td>
+                <td>学校得分率</td>
+                <td>区平均分</td>
+                <td>区得分率</td>
+            </tr>
+            <tbody ng-repeat="item in data.kpSchScoreAbility">
+            <tr ng-repeat="i in item.detail">
+                <td ng-if="$index == 0" rowspan="{{item.detail.length}}">{{item.schname}}</td>
+                <td>{{i.kpname}}</td>
+                <td>{{i.kpSchProp}}</td>
+                <td>{{i.kpSchAvgScore}}</td>
+                <td>{{i.kpSchScore}}</td>
+                <td>{{i.kpAreaAvgScore}}</td>
+                <td>{{i.kpAreaScore}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <highchart id="chart1" config="chartConfig1" style="height: 240px"></highchart>
 
         <table>
             <tr>
@@ -75,6 +103,6 @@
             <tr><td>知识点5</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
         </table>
 
-        <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
+        <highchart id="chart10" config="chartConfig10" style="height: 240px"></highchart>
     </ion-content>
 </ion-view>

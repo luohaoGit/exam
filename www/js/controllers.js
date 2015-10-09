@@ -163,7 +163,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	$scope.data = {};
 
 	//var absUrl = $location.absUrl();
-	var param = "?informid=58&gradeid=1&subjectid=1";
+	var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
 
 	/*	if(absUrl){
 	 var i = absUrl.indexOf("?");
@@ -182,11 +182,145 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	DataService.getKpSchPropCount(param).then(function(resp){
 		$scope.data.kpSchPropCount = resp.data.data;
 		console.log($scope.data)
+
+		var chartData = [];
+		for(var i=0; i<resp.data.data.length; i++){
+			var item = resp.data.data[i];
+			var count = [];
+			for(var j=0; j<item.detail.length; j++){
+				var score = item.detail[j].kpSchScore;
+				if(!count[j])	count[j] = 0;
+				count[j] += score ? parseFloat(score) : 0;
+
+				if(j == item.detail.length-1){
+					var o = {
+						name : item.detail[j].schname,
+						y : count[j]
+					}
+					chartData.push(o);
+				}
+			}
+		}
+
+		$scope.chartConfig = {
+			options: {
+				chart: {
+					type: 'column'
+				},
+				xAxis: {
+					type: 'category',
+					title: {
+						text: '知识点得分率统计'
+					}
+				},
+				yAxis: {
+					title: {
+						text: '得分率（%）'
+					}
+				},
+				legend: {
+					enabled: false
+				},
+				plotOptions: {
+					series: {
+						borderWidth: 0,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '{point.y}%'
+						}
+					}
+				},
+
+				tooltip: {
+					headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+					pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b><br/>'
+				}
+			},
+			series: chartData,
+			title: {
+				text: '知识点得分率统计'
+			},
+			credits: {
+				enabled:false
+			},
+
+			loading: false
+		};
 	},function(resp){
 		alert("网络错误")
 	});
 
-	$scope.chartConfig = {
+	DataService.getKpSchScoreAbility("?informid=69&areaid=1").then(function(resp){
+		$scope.data.kpSchScoreAbility = resp.data.data;
+		console.log($scope.data)
+		var categories = [];
+		var chartData = [];
+		for(var i=0; i<resp.data.data.length; i++){
+			var item = resp.data.data[i];
+			var o = {
+				name : item.schname
+			}
+			var arr = [];
+			for(var j=0; j<item.detail.length; j++){
+				var score = item.detail[j].kpSchProp;
+				score = score ? parseFloat(score) : 0;
+				arr.push(score);
+				if(i == 0){
+					categories.push(item.detail[j].kpname);
+				}
+			}
+			o.data = arr;
+			chartData.push(o);
+		}
+		$scope.chartConfig1 = {
+			options: {
+				chart: {
+					type: 'column'
+				},
+				xAxis: {
+					categories: categories,
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: '得分率 (%)'
+					}
+				},
+				plotOptions: {
+					series: {
+						borderWidth: 0,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '{point.y:.1f}%'
+						}
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					'<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				}
+			},
+			series: chartData,
+			title: {
+				text: '各班学校识点得分率比较统计图'
+			},
+			credits: {
+				enabled:false
+			},
+			loading: false
+		};
+	},function(resp){
+		alert("网络错误")
+	});
+
+	$scope.chartConfig10 = {
 		options: {
 			chart: {
 				type: 'column'

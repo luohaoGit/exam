@@ -85,7 +85,16 @@ angular.module('starter.services', [])
     },
 
     getKpSchPropCount: function(param) {
-      var url = remotesite + "/api.php/Home/Analyze/getKpSchPropCount?informid=58&areaid=1" + param;
+      var url = remotesite + "/api.php/Home/Analyze/getKpSchPropCount" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
+    },
+
+    getKpSchScoreAbility: function(param){
+      var url = remotesite + "/api.php/Home/Analyze/getKpSchScoreAbility" + param;
       var promise = $http({
         method: 'GET',
         url: url
