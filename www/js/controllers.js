@@ -320,65 +320,75 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		alert("网络错误")
 	});
 
-	$scope.chartConfig10 = {
-		options: {
-			chart: {
-				type: 'column'
-			},
-			xAxis: {
-				categories: [
-					'知识点1',
-					'知识点2',
-					'知识点3',
-					'知识点4',
-					'知识点5'
-				],
-				crosshair: true
-			},
-			yAxis: {
-				min: 0,
-				title: {
-					text: '得分率 (%)'
-				}
-			},
-			plotOptions: {
-				series: {
-					borderWidth: 0,
-					cursor: 'pointer',
-					dataLabels: {
-						enabled: true,
-						format: '{point.y:.1f}%'
-					}
-				}
-			},
-			tooltip: {
-				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-				'<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
-				footerFormat: '</table>',
-				shared: true,
-				useHTML: true
+	DataService.getKpClassScoreAbility("?informid=71&schid=3030").then(function(resp){
+		$scope.data.kpClassScoreAbility = resp.data.data;
+		console.log($scope.data)
+		var categories = [];
+		var chartData = [];
+		for(var i=0; i<resp.data.data.length; i++){
+			var item = resp.data.data[i];
+			var o = {
+				name : item.classname
 			}
-		},
-		series: [{
-			name: '三年二班得分率',
-			data: [49.9, 71.5, 106.4, 129.2, 144.0]
+			var arr = [];
+			for(var j=0; j<item.detail.length; j++){
+				var score = item.detail[j].kpClassScore;
+				score = score ? parseFloat(score) : 0;
+				arr.push(score);
+				if(i == 0){
+					categories.push(item.detail[j].kpname);
+				}
+			}
+			o.data = arr;
+			chartData.push(o);
+		}
+		$scope.chartConfig2 = {
+			options: {
+				chart: {
+					type: 'column'
+				},
+				xAxis: {
+					categories: categories,
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: '得分率 (%)'
+					}
+				},
+				plotOptions: {
+					series: {
+						borderWidth: 0,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '{point.y:.1f}%'
+						}
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					'<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				}
+			},
+			series: chartData,
+			title: {
+				text: '各班班级识点得分率比较统计图'
+			},
+			credits: {
+				enabled:false
+			},
+			loading: false
+		};
+	},function(resp){
+		alert("网络错误")
+	});
 
-		}, {
-			name: '三年三班得分率',
-			data: [83.6, 78.8, 98.5, 93.4, 106.0]
-
-		},{
-			name: '校平均得分率',
-			data: [48.9, 38.8, 39.3, 41.4, 47.0]
-
-		}],
-		title: {
-			text: '各班级知识点得分率比较统计图'
-		},
-
-		loading: false
-	};
 })
 
 .controller('ClassCtrl', function($scope, DataService, $stateParams) {

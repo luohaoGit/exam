@@ -100,6 +100,15 @@ angular.module('starter.services', [])
         url: url
       });
       return promise;
+    },
+
+    getKpClassScoreAbility: function(param){
+      var url = remotesite + "/api.php/Home/Analyze/getKpClassScoreAbility" + param;
+      var promise = $http({
+        method: 'GET',
+        url: url
+      });
+      return promise;
     }
   };
 });

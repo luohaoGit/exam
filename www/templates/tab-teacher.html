@@ -64,7 +64,9 @@
             </tr>
             <tbody ng-repeat="item in data.kpSchScoreAbility">
             <tr ng-repeat="i in item.detail">
-                <td ng-if="$index == 0" rowspan="{{item.detail.length}}">{{item.schname}}</td>
+                <td ng-if="$index == 0" rowspan="{{item.detail.length}}" style="text-align: center;vertical-align:middle;">
+                    <a href="#/tab/class/1">{{item.schname}}</a>
+                </td>
                 <td>{{i.kpname}}</td>
                 <td>{{i.kpSchProp}}</td>
                 <td>{{i.kpSchAvgScore}}</td>
@@ -87,22 +89,21 @@
                 <td>学校平均分</td>
                 <td>学校得分率</td>
             </tr>
-            <tr><td rowspan="5" style="text-align: center;vertical-align:middle;">
-                <a href="#/tab/class/1">三年二班</a>
-            </td><td>知识点1</td><td>14%</td><td>12</td><td>85.71%</td><td>11</td><td>78.57%</td></tr>
-            <tr><td>知识点2</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点3</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点4</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点5</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td rowspan="5" style="text-align: center;vertical-align:middle;">
-                <a href="#/tab/class/1">三年三班</a>
-            </td><td>知识点1</td><td>14%</td><td>12</td><td>85.71%</td><td>11</td><td>78.57%</td></tr>
-            <tr><td>知识点2</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点3</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点4</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
-            <tr><td>知识点5</td><td>30%</td><td>26</td><td>86.67%</td><td>27</td><td>90.00%</td></tr>
+            <tbody ng-repeat="item in data.kpClassScoreAbility">
+            <tr ng-repeat="i in item.detail">
+                <td ng-if="$index == 0" rowspan="{{item.detail.length}}" style="text-align: center;vertical-align:middle;">
+                    <a href="#/tab/class/1">{{item.classname}}</a>
+                </td>
+                <td>{{i.kpname}}</td>
+                <td>{{i.kpSchProp}}</td>
+                <td>{{i.kpClassAvgScore}}</td>
+                <td>{{i.kpClassScore}}</td>
+                <td>{{i.kpSchAvgScore}}</td>
+                <td>{{i.kpSchScore}}</td>
+            </tr>
+            </tbody>
         </table>
 
-        <highchart id="chart10" config="chartConfig10" style="height: 240px"></highchart>
+        <highchart id="chart2" config="chartConfig2" style="height: 240px"></highchart>
     </ion-content>
 </ion-view>
