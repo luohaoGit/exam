@@ -34,7 +34,7 @@
             </tbody>
         </table>
 
-        <h1>区属各小学整体知识点得分率统计表</h1>
+<!--        <h1>区属各小学整体知识点得分率统计表</h1>
         <table>
             <tr>
                 <td>知识点</td>
@@ -48,9 +48,9 @@
                 <td>{{item.detail[0].kpSchScore}}</td>
             </tr>
             </tbody>
-        </table>
+        </table>-->
 
-        <highchart id="chart" config="chartConfig" style="height: 240px"></highchart>
+        <!--<highchart id="chart" config="chartConfig" style="height: 240px"></highchart>-->
 
         <table>
             <tr>
@@ -65,7 +65,7 @@
             <tbody ng-repeat="item in data.kpSchScoreAbility">
             <tr ng-repeat="i in item.detail">
                 <td ng-if="$index == 0" rowspan="{{item.detail.length}}" style="text-align: center;vertical-align:middle;">
-                    <a href="#/tab/school/1">{{item.schname}}</a>
+                    <a href="#/tab/school/{{item.schid}}">{{item.schname}}</a>
                 </td>
                 <td>{{i.kpname}}</td>
                 <td>{{i.kpSchProp}}</td>

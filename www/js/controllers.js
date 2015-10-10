@@ -180,29 +180,27 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		alert("网络错误")
 	});
 
-	DataService.getKpSchPropCount($rootScope.teacherParam).then(function(resp){
+/*	DataService.getKpSchPropCount($rootScope.teacherParam).then(function(resp){
 		$scope.data.kpSchPropCount = resp.data.data;
 		console.log($scope.data)
 
 		var chartData = [];
+		var count = [];
 		for(var i=0; i<resp.data.data.length; i++){
 			var item = resp.data.data[i];
-			var count = [];
-			for(var j=0; j<item.detail.length; j++){
-				var score = item.detail[j].kpSchScore;
-				if(!count[j])	count[j] = 0;
-				count[j] += score ? parseFloat(score) : 0;
+			var score = item.detail[i].kpSchScore;
+			if(!count[i])	count[i] = 0;
+			count[i] += (score ? parseFloat(score) : 0);
 
-				if(j == item.detail.length-1){
-					var o = {
-						name : item.detail[j].schname,
-						y : count[j]
-					}
-					chartData.push(o);
+			if(i == resp.data.data.length-1){
+				var o = {
+					name : item.detail[j].schname,
+					y : count[j]
 				}
+				chartData.push(o);
 			}
 		}
-
+console.log(chartData)
 		$scope.chartConfig = {
 			options: {
 				chart: {
@@ -238,7 +236,11 @@ angular.module('starter.controllers', ['highcharts-ng'])
 					pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b><br/>'
 				}
 			},
-			series: chartData,
+			series: [{
+				name: "Brands",
+				colorByPoint: true,
+				data: chartData
+			}],
 			title: {
 				text: '知识点得分率统计'
 			},
@@ -250,10 +252,10 @@ angular.module('starter.controllers', ['highcharts-ng'])
 		};
 	},function(resp){
 		alert("网络错误")
-	});
+	});*/
 
-	DataService.getKpSchScoreAbility("?informid=69&areaid=1").then(function(resp){
-		$scope.data.kpSchScoreAbility = resp.data.data;
+	DataService.getKpSchScoreAbility($rootScope.teacherParam).then(function(resp){
+		$scope.data.kpSchScoreAbility = $rootScope.data.kpSchScoreAbility = resp.data.data;
 		console.log($scope.data)
 		var categories = [];
 		var chartData = [];
@@ -274,6 +276,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 			o.data = arr;
 			chartData.push(o);
 		}
+
 		$scope.chartConfig1 = {
 			options: {
 				chart: {
@@ -323,10 +326,11 @@ angular.module('starter.controllers', ['highcharts-ng'])
 
 })
 
-.controller('SchoolCtrl', function($scope, DataService, $stateParams) {
+.controller('SchoolCtrl', function($scope, DataService, $stateParams, $rootScope) {
 	$scope.schoolId = $stateParams.schoolId;
+	$rootScope.schoolId = $scope.schoolId;
 	$scope.data = [];
-	DataService.getKpClassScoreAbility("?informid=71&schid=3030").then(function(resp){
+	DataService.getKpClassScoreAbility($rootScope.teacherParam + "&schid=" + $stateParams.schoolId).then(function(resp){
 		$scope.data.kpClassScoreAbility = resp.data.data;
 		console.log($scope.data)
 		var categories = [];
@@ -396,10 +400,10 @@ angular.module('starter.controllers', ['highcharts-ng'])
 	});
 })
 
-.controller('ClassCtrl', function($scope, DataService, $stateParams) {
+.controller('ClassCtrl', function($scope, DataService, $stateParams, $rootScope) {
 	$scope.classId = $stateParams.classId;
 	$scope.data = [];
-	DataService.getKpPerScoreAbility("?informid=71&schid=3030&classid=303061").then(function(resp){
+	DataService.getKpPerScoreAbility($rootScope.teacherParam + "&classid=" + $stateParams.classId + "&schid=" + $rootScope.schoolId).then(function(resp){
 		$scope.data.kpPerScoreAbility = resp.data.data;
 		console.log($scope.data)
 	},function(resp){
