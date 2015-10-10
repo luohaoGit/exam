@@ -160,7 +160,7 @@ angular.module('starter.controllers', ['highcharts-ng'])
 })
 
 .controller('TeacherCtrl', function($scope, DataService, $location, $rootScope) {
-	$scope.data = {};
+	$scope.data = $rootScope.data;
 
 	var absUrl = $location.absUrl();
 	//var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
@@ -331,7 +331,7 @@ console.log(chartData)
 	$rootScope.schoolId = $scope.schoolId;
 	$scope.data = [];
 	DataService.getKpClassScoreAbility($rootScope.teacherParam + "&schid=" + $stateParams.schoolId).then(function(resp){
-		$scope.data.kpClassScoreAbility = resp.data.data;
+		$scope.data.kpClassScoreAbility = $rootScope.data.kpClassScoreAbility = resp.data.data;
 		console.log($scope.data)
 		var categories = [];
 		var chartData = [];
@@ -404,15 +404,38 @@ console.log(chartData)
 	$scope.classId = $stateParams.classId;
 	$scope.data = [];
 	DataService.getKpPerScoreAbility($rootScope.teacherParam + "&classid=" + $stateParams.classId + "&schid=" + $rootScope.schoolId).then(function(resp){
-		$scope.data.kpPerScoreAbility = resp.data.data;
+		$scope.data.kpPerScoreAbility = $rootScope.data.kpPerScoreAbility = resp.data.data;
 		console.log($scope.data)
 	},function(resp){
 		alert("网络错误")
 	});
 })
 
-.controller('StudentCtrl', function($scope, DataService, $stateParams) {
-	$scope.studentId = $stateParams.studentId;
+.controller('StudentCtrl', function($scope, DataService, $stateParams, $rootScope) {
+	$scope.stuid = $stateParams.stuid;
+	console.log($rootScope.data)
+	console.log($scope.stuid)
+
+	var categories = [];
+	var series = [];
+	var seriesData = [];
+	for(var i=0; i<$rootScope.data.kpPerScoreAbility.length; i++){
+		var item = $rootScope.data.kpPerScoreAbility[i];
+
+		if(item.stuid == $scope.stuid){
+			for(var j=0; j<item.detail.length; j++){
+				if(i == 0){
+					categories.push(item.detail[j].kpname);
+				}
+				seriesData.push(item.detail[j].kpPerScore);
+			}
+			var o = {
+				name: item.stuname,
+				data: seriesData
+			}
+			series.push(o);
+		}
+	}
 
 	$scope.chartConfig1 = {
 		options: {
@@ -425,7 +448,7 @@ console.log(chartData)
 				x: -20
 			},
 			xAxis: {
-				categories: ['能力点1', '能力点2', '能力点3', '能力点4', '能力点5']
+				categories: categories
 			},
 			yAxis: {
 				title: {

@@ -114,7 +114,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('tab.student', {
-    url: '/student/:classId',
+    url: '/student/:stuid',
     views: {
       'tab-teacher': {
         templateUrl: 'templates/tab-student.html',

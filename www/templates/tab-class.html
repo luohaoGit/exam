@@ -20,7 +20,7 @@
             <tbody ng-repeat="item in data.kpPerScoreAbility">
             <tr ng-repeat="i in item.detail">
                 <td ng-if="$index == 0" rowspan="{{item.detail.length}}" style="text-align: center;vertical-align:middle;">
-                    <a href="#/tab/student/1">{{item.stuname}}</a>
+                    <a href="#/tab/student/{{item.stuid}}">{{item.stuname}}</a>
                 </td>
                 <td>{{i.kpname}}</td>
                 <td>{{i.kpSchProp}}</td>
