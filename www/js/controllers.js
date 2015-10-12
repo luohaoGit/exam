@@ -413,12 +413,12 @@ console.log(chartData)
 
 .controller('StudentCtrl', function($scope, DataService, $stateParams, $rootScope) {
 	$scope.stuid = $stateParams.stuid;
-	console.log($rootScope.data)
-	console.log($scope.stuid)
 
 	var categories = [];
 	var series = [];
 	var seriesData = [];
+	var classData = [];
+	var schData = [];
 	for(var i=0; i<$rootScope.data.kpPerScoreAbility.length; i++){
 		var item = $rootScope.data.kpPerScoreAbility[i];
 
@@ -427,7 +427,14 @@ console.log(chartData)
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
-				seriesData.push(item.detail[j].kpPerScore);
+				var score = item.detail[j].kpPerScore ? parseFloat(item.detail[j].kpPerScore) : 0;
+				seriesData.push(score);
+
+				var classScore = item.detail[j].kpClassScore ? parseFloat(item.detail[j].kpClassScore) : 0;
+				classData.push(classScore);
+
+				var schScore = item.detail[j].kpSchScore ? parseFloat(item.detail[j].kpSchScore) : 0;
+				schData.push(schScore);
 			}
 			var o = {
 				name: item.stuname,
@@ -472,7 +479,7 @@ console.log(chartData)
 		},
 		series: [{
 			name: '张三',
-			data: [7.0, 6.9, 9.5, 14.5, 18.2]
+			data: seriesData
 		}],
 		title: {
 			text: '个人能力点得分率统计图'
@@ -487,13 +494,7 @@ console.log(chartData)
 				type: 'column'
 			},
 			xAxis: {
-				categories: [
-					'知识点1',
-					'知识点2',
-					'知识点3',
-					'知识点4',
-					'知识点5'
-				],
+				categories: categories,
 				crosshair: true
 			},
 			yAxis: {
@@ -523,15 +524,15 @@ console.log(chartData)
 		},
 		series: [{
 			name: '个人得分率',
-			data: [49.9, 71.5, 106.4, 129.2, 144.0]
+			data: seriesData
 
 		}, {
 			name: '班级得分率',
-			data: [83.6, 78.8, 98.5, 93.4, 106.0]
+			data: classData
 
 		},{
 			name: '学校得分率',
-			data: [48.9, 38.8, 39.3, 41.4, 47.0]
+			data: schData
 
 		}],
 		title: {
