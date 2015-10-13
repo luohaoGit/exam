@@ -257,7 +257,7 @@ console.log(chartData)
 			for(var j=0; j<item.detail.length; j++){
 				var score = item.detail[j].kpSchProp;
 				score = score ? parseFloat(score) : 0;
-				arr.push(score*100);
+				arr.push(score);
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
@@ -333,7 +333,7 @@ console.log(chartData)
 			for(var j=0; j<item.detail.length; j++){
 				var score = item.detail[j].kpClassScore;
 				score = score ? parseFloat(score) : 0;
-				arr.push(score*100);
+				arr.push(score);
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
@@ -392,7 +392,8 @@ console.log(chartData)
 .controller('ClassCtrl', function($scope, DataService, $stateParams, $rootScope) {
 	$scope.classId = $stateParams.classId;
 	$scope.data = [];
-	DataService.getKpPerScoreAbility($rootScope.teacherParam + "&classid=" + $stateParams.classId + "&schid=" + $rootScope.schoolId).then(function(resp){
+	var thisparam = $rootScope.teacherParam + "&classid=" + $stateParams.classId + ($rootScope.schoolId ? "&schid=" + $rootScope.schoolId : "");
+	DataService.getKpPerScoreAbility(thisparam).then(function(resp){
 		$scope.data.kpPerScoreAbility = $rootScope.data.kpPerScoreAbility = resp.data.data;
 		console.log($scope.data)
 	},function(resp){
@@ -419,13 +420,13 @@ console.log(chartData)
 					categories.push(item.detail[j].kpname);
 				}
 				var score = item.detail[j].kpPerScore ? parseFloat(item.detail[j].kpPerScore) : 0;
-				seriesData.push(score*100);
+				seriesData.push(score);
 
 				var classScore = item.detail[j].kpClassScore ? parseFloat(item.detail[j].kpClassScore) : 0;
-				classData.push(classScore*100);
+				classData.push(classScore);
 
 				var schScore = item.detail[j].kpSchScore ? parseFloat(item.detail[j].kpSchScore) : 0;
-				schData.push(schScore*100);
+				schData.push(schScore);
 			}
 			var o = {
 				name: item.stuname,

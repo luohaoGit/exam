@@ -17,6 +17,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     var i = absUrl.indexOf("?");
     var j = absUrl.indexOf("#");
     var param = absUrl.substring(i, j);
+    console.log(param)
+    param = param.replace("informid", "time");
+    param = param.replace("paperid", "informid");
+    console.log(param)
     $rootScope.teacherParam = param;
   }
 
