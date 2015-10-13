@@ -17,19 +17,19 @@
                 <td>分析</td>
                 <td>综合</td>
                 <td>评价</td>
-                <td>总得分率</td>
+                <!--<td>总得分率</td>-->
             </tr>
             <tbody ng-repeat="item in data.schApKp">
             <tr ng-repeat="i in item.detail">
                 <td ng-if="$index == 0" rowspan="{{item.detail.length}}">{{item.schname}}</td>
                 <td>{{i.kpname}}</td>
-                <td>{{i.scoreDetail[0].kapScore}}</td>
-                <td>{{i.scoreDetail[1].kapScore}}</td>
-                <td>{{i.scoreDetail[2].kapScore}}</td>
-                <td>{{i.scoreDetail[3].kapScore}}</td>
-                <td>{{i.scoreDetail[4].kapScore}}</td>
-                <td>{{i.scoreDetail[5].kapScore}}</td>
-                <td>0</td>
+                <td>{{i.scoreDetail[0].kapScore * 100}}</td>
+                <td>{{i.scoreDetail[1].kapScore * 100}}</td>
+                <td>{{i.scoreDetail[2].kapScore * 100}}</td>
+                <td>{{i.scoreDetail[3].kapScore * 100}}</td>
+                <td>{{i.scoreDetail[4].kapScore * 100}}</td>
+                <td>{{i.scoreDetail[5].kapScore * 100}}</td>
+                <!--<td>0</td>-->
             </tr>
             </tbody>
         </table>
@@ -68,11 +68,11 @@
                     <a href="#/tab/school/{{item.schid}}">{{item.schname}}</a>
                 </td>
                 <td>{{i.kpname}}</td>
-                <td>{{i.kpSchProp}}</td>
+                <td>{{i.kpSchProp*100}}</td>
                 <td>{{i.kpSchAvgScore}}</td>
-                <td>{{i.kpSchScore}}</td>
+                <td>{{i.kpSchScore*100}}</td>
                 <td>{{i.kpAreaAvgScore}}</td>
-                <td>{{i.kpAreaScore}}</td>
+                <td>{{i.kpAreaScore*100}}</td>
             </tr>
             </tbody>
         </table>

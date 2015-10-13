@@ -7,8 +7,17 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, $location) {
   $rootScope.param = '';
+  var absUrl = $location.absUrl();
+  //var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
+
+  if(absUrl){
+    var i = absUrl.indexOf("?");
+    var j = absUrl.indexOf("#");
+    var param = absUrl.substring(i, j);
+    $rootScope.teacherParam = param;
+  }
   $rootScope.exerciseData = [];
   $rootScope.data = [];
   $ionicPlatform.ready(function() {

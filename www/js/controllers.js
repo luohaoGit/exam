@@ -162,17 +162,6 @@ angular.module('starter.controllers', ['highcharts-ng'])
 .controller('TeacherCtrl', function($scope, DataService, $location, $rootScope) {
 	$scope.data = $rootScope.data;
 
-	var absUrl = $location.absUrl();
-	//var param = "?areaid=1&informid=69&gradeid=1&subjectid=1";
-
-	if(absUrl){
-		var i = absUrl.indexOf("?");
-		var j = absUrl.indexOf("#");
-		var param = absUrl.substring(i, j);
-		$rootScope.teacherParam = param;
-		console.log(param)
-	}
-
 	DataService.getSchApKp($rootScope.teacherParam).then(function(resp){
 		$scope.data.schApKp = resp.data.data;
 		console.log($scope.data)
@@ -268,7 +257,7 @@ console.log(chartData)
 			for(var j=0; j<item.detail.length; j++){
 				var score = item.detail[j].kpSchProp;
 				score = score ? parseFloat(score) : 0;
-				arr.push(score);
+				arr.push(score*100);
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
@@ -313,7 +302,7 @@ console.log(chartData)
 			},
 			series: chartData,
 			title: {
-				text: '各班学校识点得分率比较统计图'
+				text: '各班学校知识点得分率比较统计图'
 			},
 			credits: {
 				enabled:false
@@ -344,7 +333,7 @@ console.log(chartData)
 			for(var j=0; j<item.detail.length; j++){
 				var score = item.detail[j].kpClassScore;
 				score = score ? parseFloat(score) : 0;
-				arr.push(score);
+				arr.push(score*100);
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
@@ -419,22 +408,24 @@ console.log(chartData)
 	var seriesData = [];
 	var classData = [];
 	var schData = [];
+	var stuName = "";
 	for(var i=0; i<$rootScope.data.kpPerScoreAbility.length; i++){
 		var item = $rootScope.data.kpPerScoreAbility[i];
 
 		if(item.stuid == $scope.stuid){
+			stuName = item.stuname;
 			for(var j=0; j<item.detail.length; j++){
 				if(i == 0){
 					categories.push(item.detail[j].kpname);
 				}
 				var score = item.detail[j].kpPerScore ? parseFloat(item.detail[j].kpPerScore) : 0;
-				seriesData.push(score);
+				seriesData.push(score*100);
 
 				var classScore = item.detail[j].kpClassScore ? parseFloat(item.detail[j].kpClassScore) : 0;
-				classData.push(classScore);
+				classData.push(classScore*100);
 
 				var schScore = item.detail[j].kpSchScore ? parseFloat(item.detail[j].kpSchScore) : 0;
-				schData.push(schScore);
+				schData.push(schScore*100);
 			}
 			var o = {
 				name: item.stuname,
@@ -478,7 +469,7 @@ console.log(chartData)
 			}
 		},
 		series: [{
-			name: '张三',
+			name: stuName,
 			data: seriesData
 		}],
 		title: {
