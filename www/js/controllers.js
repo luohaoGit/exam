@@ -302,7 +302,7 @@ console.log(chartData)
 			},
 			series: chartData,
 			title: {
-				text: '各班学校知识点得分率比较统计图'
+				text: '学校各班知识点得分率比较统计图'
 			},
 			credits: {
 				enabled:false
